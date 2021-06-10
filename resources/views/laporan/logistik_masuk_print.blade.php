@@ -22,7 +22,7 @@
     <body>
         <table width="100%">
             <tr>
-                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.jpg') }}" alt="" width="150"/></td>
+                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.png') }}" alt="" width="150"/></td>
                 <td align="right">
                     <h3>BADAN PENANGGULANGAN BENCANA DAERAH <br> KABUPATEN MALANG</h3>
                     <pre>

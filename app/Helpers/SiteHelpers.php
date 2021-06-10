@@ -15,6 +15,7 @@ class SiteHelpers{
         ->select('menu.*', 'akses.*')
         ->where('akses.role_id', session('berhasil_login')['role'])
         ->where('menu.level_menu','main menu')
+        ->where('menu.action', 1)
         ->get();
 
         return $main_menu;
@@ -24,6 +25,7 @@ class SiteHelpers{
         $sub_menu = DB::table('akses')->join('menu', 'menu.id', '=', 'akses.menu_id')
         ->select('menu.*')
         ->where('akses.role_id', session('berhasil_login')['role'])
+        ->where('menu.action', 1)
         ->where('menu.level_menu','submenu')->get();
 
         return $sub_menu;

@@ -176,7 +176,7 @@
 @endsection
 
 @section('modal_logistik')
-    <div class="modal fade" tabindex="-1" role="dialog" id="logistikModal">
+    <div class="modal fade" role="dialog" id="logistikModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -14,11 +14,11 @@ class CreatePegawaiTransaksiMasukTable extends Migration
     public function up()
     {
         Schema::create('pegawai_transaksi_masuk', function (Blueprint $table) {
-            $table->tinyInteger('action');
+            $table->tinyInteger('action')->comment('1: pengajuan, 2: verifikasi');
             $table->bigInteger('pegawai_id')->unsigned();
             $table->bigInteger('transaksi_masuk_id')->unsigned();
-            $table->foreign('pegawai_id')->references('id')->on('pegawai');
-            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk');
+            $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade');
+            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk')->onDelete('cascade');
         });
     }
 

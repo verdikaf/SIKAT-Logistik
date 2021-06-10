@@ -17,7 +17,7 @@ class CreateTransaksiKeluarsTable extends Migration
             $table->bigIncrements('id');
             $table->date('tanggal')->nullable();
             $table->text('lokasi')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->comment('0: pending, 1: proses verifikasi, 2: sukses, dengan catatan, 3: sukses, 4: sukses, barang belum kembali');
         });
     }
 

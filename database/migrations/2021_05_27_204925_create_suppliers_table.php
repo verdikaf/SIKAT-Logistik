@@ -17,6 +17,7 @@ class CreateSuppliersTable extends Migration
             $table->increments('id');
             $table->string('nama_supplier', 45);
             $table->text('alamat');
+            $table->timestamps();
         });
     }
 

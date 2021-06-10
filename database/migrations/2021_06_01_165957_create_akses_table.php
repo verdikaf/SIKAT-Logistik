@@ -16,8 +16,8 @@ class CreateAksesTable extends Migration
         Schema::create('akses', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('menu_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('role');
-            $table->foreign('menu_id')->references('id')->on('menu');
+            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
+            $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
         });
     }
 

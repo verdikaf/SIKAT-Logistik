@@ -69,7 +69,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($item->status != 0 || $item->status != 1)
+                                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4)
                                             <a href="{{ url('/transaksi/t_keluar/'.$item->id.'/cetak') }}" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i></a>
                                         @endif
                                         <a href="{{ url('/transaksi/t_keluar/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>

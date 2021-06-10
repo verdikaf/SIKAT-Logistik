@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url('/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ url('/assets/css/components.css') }}">
-  <link rel="shortcut icon" href="{{ url('/assets/img/bpbdmalangkab.jpg') }}" />
+  <link rel="shortcut icon" href="{{ url('/assets/img/bpbdmalangkab.png') }}" />
 </head>
 
 <body>
@@ -21,12 +21,12 @@
             <div class="row">
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div class="login-brand">
-                        <img src="{{ url('/assets/img/bpbdmalangkab.jpg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
+                        <img src="{{ url('/assets/img/bpbdmalangkab.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
                     </div>
-        
+
                     <div class="card card-primary">
                         <div class="card-header"><h4>Login</h4></div>
-            
+
                         <div class="card-body">
                             <form method="POST" action="{{ url('/') }}" class="needs-validation" novalidate="">
                                 @csrf
@@ -54,7 +54,7 @@
                                         </button>
                                         {{ session('message') }}
                                     </div>
-                                </div>   
+                                </div>
                                 @endif
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-warning btn-lg btn-block" tabindex="4">
@@ -62,11 +62,11 @@
                                     </button>
                                 </div>
                             </form>
-            
+
                         </div>
                     </div>
                     <div class="simple-footer">
-                    Copyright &copy; Sinergi Spasial 2021
+                    Copyright &copy; Verdika Fajar 2021
                     </div>
                 </div>
             </div>
@@ -84,6 +84,6 @@
     <script src="{{ url('/assets/js/stisla.js') }}"></script>
     <script src="{{ url('/assets/js/scripts.js') }}"></script>
     <script src="{{ url('/assets/js/custom.js') }}"></script>
-  
+
 </body>
 </html>

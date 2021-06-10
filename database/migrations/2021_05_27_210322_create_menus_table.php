@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('icon', 45)->nullable();
             $table->string('url', 45)->nullable();
             $table->integer('main_menu')->nullable();
+            $table->tinyInteger('action')->comment('0 = tidak aktif, 1 = aktif');
         });
     }
 

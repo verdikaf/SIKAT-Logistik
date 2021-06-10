@@ -22,7 +22,7 @@
                     <div class="card-header">
                         <h4>Data Logistik Keluar</h4>
                         <div class="card-header-form">
-                            @if ($transaksiKeluar->implode('status') != 0 || $transaksiKeluar->implode('status') != 1)
+                            @if ($transaksiKeluar->implode('status') == 2 || $transaksiKeluar->implode('status') == 3 || $transaksiKeluar->implode('status') == 4)
                                 <a href="{{ url('/transaksi/t_keluar/'.$transaksiKeluar->implode('id').'/cetak') }}" target="_blank" class="btn btn-primary">Cetak Invoice</a>
                             @endif
                             <a href="{{ url('transaksi/t_keluar') }}" class="btn btn-secondary" type="button">Kembali ke Halaman Utama</a>

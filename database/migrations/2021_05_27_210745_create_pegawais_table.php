@@ -25,10 +25,10 @@ class CreatePegawaisTable extends Migration
             $table->text('alamat');
             $table->string('password', 64);
             $table->string('foto', 100)->nullable();
-            $table->tinyInteger('status');
-            $table->tinyInteger('asn');
+            $table->tinyInteger('status')->comment('0 = tidak aktif, 1 = aktif');
+            $table->tinyInteger('asn')->comment('0 = tidak, 1 = iya');
             $table->integer('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('role');
+            $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
         });
     }
 

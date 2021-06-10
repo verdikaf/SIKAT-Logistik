@@ -16,8 +16,8 @@ class CreateSupplierTransaksiTable extends Migration
         Schema::create('supplier_transaksi', function (Blueprint $table) {
             $table->integer('supplier_id')->unsigned();
             $table->bigInteger('transaksi_masuk_id')->unsigned();
-            $table->foreign('supplier_id')->references('id')->on('supplier');
-            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk');
+            $table->foreign('supplier_id')->references('id')->on('supplier')->onDelete('cascade');
+            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk')->onDelete('cascade');
         });
     }
 

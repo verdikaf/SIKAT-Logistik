@@ -16,7 +16,7 @@ class CreateTransaksiMasuksTable extends Migration
         Schema::create('transaksi_masuk', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tanggal')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->comment('0: pending, 1: proses verifikasi, 2: verifikasi berhasil, 3: verifikasi gagal');
         });
     }
 

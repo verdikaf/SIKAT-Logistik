@@ -13,19 +13,27 @@ class LaporanController extends Controller
 {
     public function lap_supplier(Request $request)
     {
-        if (!empty($request->input('search'))) {
-            $supplier = Supplier::where('nama_supplier','like',"%".$request->search."%")->orderBy('nama_supplier', 'asc')->paginate(10);
+        $date_start = $request->date_start;
+        $date_end = $request->date_end;
+        if (!empty($date_start) && !empty($date_end)) {
+            $supplier = Supplier::whereBetween('created_at', [$date_start, $date_end])->orderBy('nama_supplier', 'asc')->paginate(10);
         } else {
             $supplier = Supplier::orderBy('nama_supplier', 'asc')->paginate(10);
         }
-        return view('laporan.supplier', compact('supplier'));
+        return view('laporan.supplier', compact('supplier', 'date_start', 'date_end'));
     }
 
-    public function lap_supplier_print()
+    public function lap_supplier_print(Request $request)
     {
-        $supplier = Supplier::all();
+        $date_start = $request->date_start;
+        $date_end = $request->date_end;
+        if (!empty($date_start) && !empty($date_end)) {
+            $supplier = Supplier::whereBetween('created_at', [$date_start, $date_end])->orderBy('nama_supplier', 'asc')->get();
+        } else {
+            $supplier = Supplier::orderBy('nama_supplier', 'asc')->get();
+        }
         $pegawai = session('berhasil_login')['nama'];
-        $pdf = PDF::loadview('laporan.supplier_print', ['supplier' => $supplier, 'pegawai' => $pegawai]);
+        $pdf = PDF::loadview('laporan.supplier_print', ['supplier' => $supplier, 'pegawai' => $pegawai, 'date_start' => $date_start, 'date_end' => $date_end]);
         $tgl = preg_replace("/[^0-9]/", "", date('d-m-Y H:i:s'));
         return $pdf->download('laporan_supplier_'.$tgl.'.pdf');
         // return view('laporan.invoice_print');

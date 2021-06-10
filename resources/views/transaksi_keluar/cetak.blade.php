@@ -22,7 +22,7 @@
     <body>
         <table width="100%">
             <tr>
-                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.jpg') }}" alt="" width="150"/></td>
+                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.png') }}" alt="" width="150"/></td>
                 <td align="right">
                     <h3>BADAN PENANGGULANGAN BENCANA DAERAH <br> KABUPATEN MALANG</h3>
                     <pre>
@@ -113,6 +113,18 @@
                     @foreach ($transaksiKeluar as $key => $item)
                         @foreach ($item->pegawai as $as)
                             @if ($as->pivot->action == 2)
+                                {{ $as->nama_pegawai }}
+                            @endif
+                        @endforeach
+                    @endforeach
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <strong>Petugas Pengembalian oleh:</strong>
+                    @foreach ($transaksiKeluar as $key => $item)
+                        @foreach ($item->pegawai as $as)
+                            @if ($as->pivot->action == 3)
                                 {{ $as->nama_pegawai }}
                             @endif
                         @endforeach

@@ -4,7 +4,7 @@
         <a href="/dashboard">SIKAT BPBD</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-        <a href="/dashboard"><img src="{{ url('/assets/img/bpbdmalangkab.jpg') }}" alt="logo" width="35" class="shadow-light rounded-circle"></a>
+        <a href="/dashboard"><img src="{{ url('/assets/img/bpbdmalangkab.png') }}" alt="logo" width="35" class="shadow-light rounded-circle"></a>
         </div>
         <ul class="sidebar-menu">
             <li class="@if (Request::segment(1) == 'dashboard') active @endif"><a class="nav-link" href="/dashboard">

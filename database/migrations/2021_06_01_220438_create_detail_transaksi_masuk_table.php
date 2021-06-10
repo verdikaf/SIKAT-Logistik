@@ -18,11 +18,11 @@ class CreateDetailTransaksiMasukTable extends Migration
             $table->string('satuan', 45);
             $table->integer('jumlah');
             $table->date('expired')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->comment('0: proses verifikasi, 1: verifikasi berhasil, 2: verifikasi gagal');
             $table->bigInteger('logistik_id')->unsigned();
             $table->bigInteger('transaksi_masuk_id')->unsigned();
-            $table->foreign('logistik_id')->references('id')->on('logistik');
-            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk');
+            $table->foreign('logistik_id')->references('id')->on('logistik')->onDelete('cascade');
+            $table->foreign('transaksi_masuk_id')->references('id')->on('transaksi_masuk')->onDelete('cascade');
         });
     }
 

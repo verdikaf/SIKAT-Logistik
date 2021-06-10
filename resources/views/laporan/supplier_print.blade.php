@@ -22,7 +22,7 @@
     <body>
         <table width="100%">
             <tr>
-                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.jpg') }}" alt="" width="150"/></td>
+                <td valign="top"><img src="{{ public_path('/assets/img/bpbdmalangkab.png') }}" alt="" width="150"/></td>
                 <td align="right">
                     <h3>BADAN PENANGGULANGAN BENCANA DAERAH <br> KABUPATEN MALANG</h3>
                     <pre>
@@ -38,6 +38,24 @@
         <table width="100%">
             <tr>
                 <td colspan="2"><strong>Perihal:</strong> Laporan Supplier dan Donatur</td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Mulai tanggal:</strong>
+                    @if (empty($date_start))
+                        -
+                    @else
+                        {{ date('d-m-Y', strtotime($date_start)) }}
+                    @endif
+                </td>
+                <td>
+                    <strong>Hingga tanggal:</strong>
+                    @if (empty($date_end))
+                        -
+                    @else
+                        {{ date('d-m-Y', strtotime($date_end)) }}
+                    @endif
+                </td>
             </tr>
         </table>
     <br/>

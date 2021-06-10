@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url('/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ url('/assets/css/components.css') }}">
-  <link rel="shortcut icon" href="{{ url('/assets/img/bpbdmalangkab.jpg') }}" />
+  <link rel="shortcut icon" href="{{ url('/assets/img/bpbdmalangkab.png') }}" />
 </head>
 
 <body>
@@ -58,7 +58,7 @@
 
             <footer class="main-footer">
             <div class="footer-left">
-                Copyright &copy; 2021 <div class="bullet"></div> Development By <a href="{{ url('https://sinergispasial.com/') }}" target="_blank">Sinergi Spasial Indonesia</a>
+                Copyright &copy; 2021 <div class="bullet"></div> Development By Verdika Fajar Saputra
             </div>
             <div class="footer-right">
                 Versi 1.0

@@ -21,8 +21,8 @@ class CreateLogistiksTable extends Migration
             $table->integer('stok_opname')->nullable();
             $table->integer('satuan_id')->unsigned();
             $table->integer('kategori_id')->unsigned();
-            $table->foreign('satuan_id')->references('id')->on('satuan');
-            $table->foreign('kategori_id')->references('id')->on('kategori');
+            $table->foreign('satuan_id')->references('id')->on('satuan')->onDelete('cascade');
+            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
         });
     }
 

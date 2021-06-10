@@ -44,28 +44,28 @@
                                     <th scope="col">Info</th>
                                 </tr>
                                 @foreach ($transaksi as $key => $item)
-                                <tr>
-                                    <td>{{ $transaksi->FirstItem() + $key }}</td>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->lokasi }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($item->tanggal)) }}</td>
-                                    <td>
-                                        @if ($item->status == 0)
-                                            <div class="badge badge-warning">Pending</div>
-                                        @elseif ($item->status == 1)
-                                            <div class="badge badge-info">Dalam Proses</div>
-                                        @elseif ($item->status == 2)
-                                            <div class="badge badge-success">Sudah Kembali</div>
-                                        @elseif ($item->status == 3)
-                                            <div class="badge badge-success">Sudah Kembali</div>
-                                        @elseif ($item->status == 4)
-                                            <div class="badge badge-info">Belum Kembali</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{ url('/transaksi/t_kembali/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $transaksi->FirstItem() + $key }}</td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->lokasi }}</td>
+                                        <td>{{ date("d-m-Y", strtotime($item->tanggal)) }}</td>
+                                        <td>
+                                            @if ($item->status == 0)
+                                                <div class="badge badge-warning">Pending</div>
+                                            @elseif ($item->status == 1)
+                                                <div class="badge badge-info">Dalam Proses</div>
+                                            @elseif ($item->status == 2)
+                                                <div class="badge badge-success">Sudah Kembali</div>
+                                            @elseif ($item->status == 3)
+                                                <div class="badge badge-success">Sudah Kembali</div>
+                                            @elseif ($item->status == 4)
+                                                <div class="badge badge-info">Belum Kembali</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('/transaksi/t_kembali/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </table>
                             <div class="card-body">

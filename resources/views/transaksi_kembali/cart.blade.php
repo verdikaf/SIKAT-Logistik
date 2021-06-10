@@ -118,7 +118,7 @@
                                         <td>{{ $item->jumlah.' '.$item->satuan }}</td>
                                         @if ($pegawai->role_id == 3 && $item->status == 2)
                                         <td>
-                                            <button type="button" id="kembali" data-transaksi="{{ $item->transaksi_keluar_id }}" data-logistik="{{ $item->logistik_id }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-calendar-check"></i> Kembali</button>
+                                            <button type="button" id="kembali" data-transaksi="{{ $item->transaksi_keluar_id }}" data-logistik="{{ $item->logistik_id }}" class="btn btn-icon icon-left btn-warning"><i class="far fa-calendar-check"></i> Kembali</button>
                                         </td>
                                         @elseif ($pegawai->role_id == 1 && $item->status == 2)
                                             <td><div class="badge badge-warning">Belum Kembali</div></td>
