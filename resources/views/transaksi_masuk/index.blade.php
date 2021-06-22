@@ -16,6 +16,16 @@
     <div class="section-body">
         <div class="row">
             <div class="col-12">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        <div class="alert-body">
+                            <button class="close" data-dismiss="alert">
+                                <span>×</span>
+                            </button>
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         @if (session('berhasil_login')['role'] == 1)
@@ -59,17 +69,17 @@
                                         @elseif ($item->status == 1)
                                             <div class="badge badge-info">Dalam Proses</div>
                                         @elseif ($item->status == 2)
-                                            <div class="badge badge-success">Sukses</div>
+                                            <div class="badge badge-success">Selesai</div>
                                             <div class="badge badge-danger">Dengan catatan</div>
                                         @elseif ($item->status == 3)
-                                            <div class="badge badge-success">Sukses</div>
+                                            <div class="badge badge-success">Selesai</div>
                                         @endif
                                     </td>
                                     <td>
+                                        <a href="{{ url('/transaksi/t_masuk/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                                         @if ($item->status == 2 || $item->status == 3)
                                             <a href="{{ url('/transaksi/t_masuk/'.$item->id.'/cetak') }}" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i></a>
                                         @endif
-                                        <a href="{{ url('/transaksi/t_masuk/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -34,7 +34,7 @@ class RoleController extends Controller
         $role->nama_role = $request->nama_role;
         $role->save();
 
-        return redirect('/data-pegawai/role');
+        return redirect('/data-pegawai/role')->with('success', 'Data Berhasil Ditambahkan.');
     }
 
     public function show(Role $role)
@@ -58,7 +58,7 @@ class RoleController extends Controller
         $role->nama_role = $request->nama_role;
         $role->save();
 
-        return redirect('/data-pegawai/role');
+        return redirect('/data-pegawai/role')->with('success', 'Data Berhasil Diperbarui.');
     }
 
     public function destroy(Role $role)

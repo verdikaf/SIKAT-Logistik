@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\Role;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PegawaiController extends Controller
 {
@@ -87,6 +90,14 @@ class PegawaiController extends Controller
             $uniqueFileName = "default-ava.png";
         }
 
+        $time = time();
+        $QRimage = QrCode::format('png')
+                     ->size(200)->errorCorrection('H')
+                     ->generate('http://127.0.0.1:8000/user-validate/img-'.$time.'.png');
+        $QRname = 'img-' . $time . '.png';
+        $output_file = '/qr-profile/' . $QRname;
+        Storage::disk('public')->put($output_file, $QRimage);
+
         $pegawai = new Pegawai;
         $pegawai->id = $id;
         $pegawai->nik = $request->nik;
@@ -102,6 +113,7 @@ class PegawaiController extends Controller
         $pegawai->role_id = $request->role_id;
         $pegawai->status = 1;
         $pegawai->asn = $asn;
+        $pegawai->qr = $QRname;
         $pegawai->save();
 
         return redirect('/data-pegawai/pegawai')->with('success', 'Data Berhasil Ditambahkan.');
@@ -130,6 +142,7 @@ class PegawaiController extends Controller
             'no_telp' => 'required|numeric',
             'alamat' => 'required|min:5',
             'role_id' => 'required',
+            'status' => 'required',
         ], [
             'nama.required' => 'Nama pegawai harus diisi.',
             'nama.min' => 'Nama pegawai harus lebih dari 2 karakter.',
@@ -146,6 +159,7 @@ class PegawaiController extends Controller
             'alamat.required' => 'Alamat harus diisi.',
             'alamat.min' => 'Alamat harus lebih dari 5 karakter.',
             'role_id.required' => 'Jabatan harus diisi.',
+            'status.required' => 'Status harus diisi.',
         ]);
 
         if (!empty($request->foto)) {
@@ -156,9 +170,17 @@ class PegawaiController extends Controller
                 'foto.mimes' => 'File harus berformat jpeg, png, jpg, gif, svg.',
                 'foto.max' => 'Ukuran foto terlalu besar.',
             ]);
-            $imageName = $request->foto->extension();
-            $request->foto->move(public_path('images'), $imageName);
-            $pegawai->foto = $imageName;
+
+            if(File::exists(public_path('images/'.$pegawai->foto))){
+                if($pegawai->foto != 'default-ava.png'){
+                    File::delete(public_path('images/'.$pegawai->foto));
+                }
+            }
+
+            $file = $request->file('foto');
+            $uniqueFileName = uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images'), $uniqueFileName);
+            $pegawai->foto = $uniqueFileName;
         }
         if (!empty($request->password)) {
             $request->validate([
@@ -177,6 +199,7 @@ class PegawaiController extends Controller
             $pegawai->id = $request->id;
             $pegawai->asn = 1;
         }
+
         $pegawai->nama_pegawai = $request->nama;
         $pegawai->nik = $request->nik;
         $pegawai->jenis_kelamin = $request->jenis_kelamin;
@@ -186,6 +209,7 @@ class PegawaiController extends Controller
         $pegawai->no_telp = $request->no_telp;
         $pegawai->alamat = $request->alamat;
         $pegawai->role_id = $request->role_id;
+        $pegawai->status = $request->status;
         $pegawai->save();
 
         return redirect('/data-pegawai/pegawai')->with('success', 'Data Berhasil Diperbarui.');
@@ -230,10 +254,20 @@ class PegawaiController extends Controller
                 'foto.mimes' => 'File harus berformat jpeg, png, jpg, gif, svg.',
                 'foto.max' => 'Ukuran foto terlalu besar.',
             ]);
-            $imageName = $request->foto->extension();
-            $request->foto->move(public_path('images'), $imageName);
+
+            $pegawai = Pegawai::where('id', $request->id)->first();
+
+            if(File::exists(public_path('images/'.$pegawai->foto))){
+                if($pegawai->foto != 'default-ava.png'){
+                    File::delete(public_path('images/'.$pegawai->foto));
+                }
+            }
+
+            $file = $request->file('foto');
+            $uniqueFileName = uniqid() . $file->getClientOriginalName();
+            $file->move(public_path('/images'), $uniqueFileName);
             Pegawai::where('id', $request->id)
-                    ->update(['foto' => $imageName]);
+                    ->update(['foto' => $uniqueFileName]);
         }
         if (!empty($request->password)) {
             $request->validate([
@@ -255,17 +289,13 @@ class PegawaiController extends Controller
                             'no_telp' => $request->no_telp,
                             'alamat' => $request->alamat]);
 
-        // $pegawai->nama_pegawai = $request->nama;
-        // $pegawai->nik = $request->nik;
-        // $pegawai->jenis_kelamin = $request->jenis_kelamin;
-        // $pegawai->agama = $request->agama;
-        // $pegawai->tempat_lahir = $request->tempat_lahir;
-        // $pegawai->tgl_lahir = $request->tgl_lahir;
-        // $pegawai->no_telp = $request->no_telp;
-        // $pegawai->alamat = $request->alamat;
-        // $pegawai->save();
-
         return redirect('/profil')->with('success', 'Data Berhasil Diperbarui.');
+    }
+
+    public function user_validate($pegawai)
+    {
+        $pegawai = Pegawai::where('qr', $pegawai)->first();
+        return view('pegawai.user-validate', compact('pegawai'));
     }
 
     public function destroy($id)

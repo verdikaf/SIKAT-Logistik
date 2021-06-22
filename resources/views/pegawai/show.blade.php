@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <a class="btn btn-warning" href="{{ url()->previous() }}">Kembali</a>
                     &nbsp;&nbsp;
-                    <h4>Detail {{ $pegawai->nama_pegawai }}</h4>
+                    <h4>Detail {{ $pegawai->nama_pegawai }} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> {{ $pegawai->role->nama_role }}</div></h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                                 <th scope="col">Tempat, Tanggal Lahir</th>
-                                <td>{{ $pegawai->tempat_lahir .", ". $pegawai->tgl_lahir }}</td>
+                                <td>{{ $pegawai->tempat_lahir .", ". date("d-m-Y", strtotime($pegawai->tgl_lahir)) }}</td>
                             </tr>
                             <tr>
                                 <th scope="col">Jenis Kelamin</th>

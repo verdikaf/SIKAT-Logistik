@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailTransaksiMasuk;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\TransaksiKeluar;
@@ -32,7 +33,7 @@ class LaporanController extends Controller
         } else {
             $supplier = Supplier::orderBy('nama_supplier', 'asc')->get();
         }
-        $pegawai = session('berhasil_login')['nama'];
+        $pegawai = Pegawai::find(session('berhasil_login')['id'])->first();
         $pdf = PDF::loadview('laporan.supplier_print', ['supplier' => $supplier, 'pegawai' => $pegawai, 'date_start' => $date_start, 'date_end' => $date_end]);
         $tgl = preg_replace("/[^0-9]/", "", date('d-m-Y H:i:s'));
         return $pdf->download('laporan_supplier_'.$tgl.'.pdf');
@@ -56,11 +57,14 @@ class LaporanController extends Controller
         $date_start = $request->date_start;
         $date_end = $request->date_end;
         if (!empty($date_start) && !empty($date_end)) {
-            $transaksiMasuk = TransaksiMasuk::with('supplier', 'logistik')->whereBetween('tanggal', [$date_start, $date_end])->get();
+            $transaksiMasuk = TransaksiMasuk::with('supplier', 'logistik')
+            ->whereBetween('tanggal', [$date_start, $date_end])
+            ->whereBetween('status', [2, 3])
+            ->get();
         } else {
             $transaksiMasuk = TransaksiMasuk::with('supplier', 'logistik')->get();
         }
-        $pegawai = session('berhasil_login')['nama'];
+        $pegawai = Pegawai::find(session('berhasil_login')['id'])->first();
         $pdf = PDF::loadview('laporan.logistik_masuk_print', ['transaksiMasuk' => $transaksiMasuk, 'pegawai' => $pegawai, 'date_start' => $date_start, 'date_end' => $date_end]);
         $tgl = preg_replace("/[^0-9]/", "", date('d-m-Y H:i:s'));
         return $pdf->download('laporan_transaksi_masuk_'.$tgl.'.pdf');
@@ -84,11 +88,14 @@ class LaporanController extends Controller
         $date_start = $request->date_start;
         $date_end = $request->date_end;
         if (!empty($date_start) && !empty($date_end)) {
-            $transaksiKeluar = TransaksiKeluar::with('logistik')->whereBetween('tanggal', [$date_start, $date_end])->get();
+            $transaksiKeluar = TransaksiKeluar::with('logistik')
+            ->whereBetween('tanggal', [$date_start, $date_end])
+            ->whereBetween('status', [2, 4])
+            ->get();
         } else {
             $transaksiKeluar = TransaksiKeluar::with('logistik')->get();
         }
-        $pegawai = session('berhasil_login')['nama'];
+        $pegawai = Pegawai::find(session('berhasil_login')['id'])->first();
         $pdf = PDF::loadview('laporan.logistik_keluar_print', ['transaksiKeluar' => $transaksiKeluar, 'pegawai' => $pegawai, 'date_start' => $date_start, 'date_end' => $date_end]);
         $tgl = preg_replace("/[^0-9]/", "", date('d-m-Y H:i:s'));
         return $pdf->download('laporan_transaksi_keluar_'.$tgl.'.pdf');

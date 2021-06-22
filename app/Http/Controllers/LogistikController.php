@@ -58,7 +58,7 @@ class LogistikController extends Controller
         $logistik->satuan_id = $request->satuan_id;
         $logistik->save();
 
-        return redirect('/master-data/logistik');
+        return redirect('/master-data/logistik')->with('success', 'Data Berhasil Ditambahkan.');
     }
 
     public function show(Logistik $logistik)
@@ -95,7 +95,7 @@ class LogistikController extends Controller
         $logistik->satuan_id = $request->satuan_id;
         $logistik->save();
 
-        return redirect('/master-data/logistik');
+        return redirect('/master-data/logistik')->with('success', 'Data Berhasil Diperbarui.');
     }
 
     public function destroy($id)

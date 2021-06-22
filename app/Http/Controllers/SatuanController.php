@@ -40,7 +40,7 @@ class SatuanController extends Controller
             $satuan->nama_satuan = $request->nama_satuan;
             $satuan->save();
 
-            return redirect('/master-data/satuan');
+            return redirect('/master-data/satuan')->with('success', 'Data Berhasil Ditambahkan.');
         }
     }
 
@@ -66,7 +66,7 @@ class SatuanController extends Controller
         $satuan->nama_satuan = $request->nama_satuan;
         $satuan->save();
 
-        return redirect('/master-data/satuan');
+        return redirect('/master-data/satuan')->with('success', 'Data Berhasil Diperbarui.');
     }
 
     public function destroy(Satuan $satuan)

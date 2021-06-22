@@ -38,7 +38,7 @@ class KategoriController extends Controller
         $kategori->tipe_logistik = $request->tipe_logistik;
         $kategori->save();
 
-        return redirect('/master-data/kategori');
+        return redirect('/master-data/kategori')->with('success', 'Data Berhasil Ditambahkan.');
     }
 
     public function show(Kategori $kategori)
@@ -66,7 +66,7 @@ class KategoriController extends Controller
         $kategori->tipe_logistik = $request->tipe_logistik;
         $kategori->save();
 
-        return redirect('/master-data/kategori');
+        return redirect('/master-data/kategori')->with('success', 'Data Berhasil Diperbarui.');
     }
 
     public function destroy(Kategori $kategori)

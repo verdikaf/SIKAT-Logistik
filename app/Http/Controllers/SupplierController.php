@@ -40,7 +40,7 @@ class SupplierController extends Controller
         $supplier->alamat = $request->alamat;
         $supplier->save();
 
-        return redirect('/master-data/supplier');
+        return redirect('/master-data/supplier')->with('success', 'Data Berhasil Ditambahkan.');
     }
 
     public function show(Supplier $supplier)
@@ -69,7 +69,7 @@ class SupplierController extends Controller
         $supplier->alamat = $request->alamat;
         $supplier->save();
 
-        return redirect('/master-data/supplier');
+        return redirect('/master-data/supplier')->with('success', 'Data Berhasil Diperbarui.');
     }
 
     public function destroy(Supplier $supplier)

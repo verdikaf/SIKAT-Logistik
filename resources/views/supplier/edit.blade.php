@@ -39,7 +39,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-warning">Simpan Perbaruan</button>
+                            <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
                         </form>
                     </div>
                 </div>

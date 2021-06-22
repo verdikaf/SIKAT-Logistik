@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailTransaksiKeluar;
-use App\Models\DetailTransaksiMasuk;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\Supplier;

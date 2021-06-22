@@ -57,6 +57,9 @@
                                         @error('id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                    @else
+                                    <label>NIP ASN/PPPK</label>
+                                        <input type="text" class="form-control" name="id" value="{{ $pegawai->id }}" readonly>
                                     @endif
                                 </div>
                             </div>
@@ -163,6 +166,19 @@
                                 @error('alamat')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Status Pegawai<i class="text-danger">*</i></label>
+                                    <select class="form-control @error('status') is-invalid @enderror" name="status">
+                                        <option value="">-- Pilih Status --</option>
+                                        <option value="1" @if (old('status', $pegawai->status) == 1) selected="selected" @endif>Aktif</option>
+                                        <option value="0" @if (old('status', $pegawai->status) == 0) selected="selected" @endif>Tidak Aktif</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                             <i class="text-danger">*) Wajib Diisi</i><br><br>
                             <button type="submit" class="btn btn-warning">Simpan Perubahan</button>

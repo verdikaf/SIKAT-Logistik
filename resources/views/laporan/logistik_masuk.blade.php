@@ -65,23 +65,25 @@
                                         <th scope="col">Status</th>
                                     </tr>
                                     @foreach ($transaksiMasuk as $key => $item)
-                                        @foreach ($item->logistik as $log)
-                                            <tr>
-                                                <td>{{ $item->id }}</td>
-                                                <td>{{ date("d-m-Y", strtotime($item->tanggal)) }}</td>
-                                                <td>{{ $item->supplier->implode('nama_supplier') }}</td>
-                                                <td>{{ $log->pivot->nama_logistik }}</td>
-                                                <td>{{ $log->pivot->jumlah.' '.$log->pivot->satuan }}</td>
-                                                <td>{{ date("d-m-Y", strtotime($log->pivot->expired)) }}</td>
-                                                <td>
-                                                    @if ($log->pivot->status == 1)
-                                                        Sukses
-                                                    @else
-                                                        Gagal
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        @if ($item->status == 2 | $item->status == 3)
+                                            @foreach ($item->logistik as $log)
+                                                <tr>
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ date("d-m-Y", strtotime($item->tanggal)) }}</td>
+                                                    <td>{{ $item->supplier->implode('nama_supplier') }}</td>
+                                                    <td>{{ $log->pivot->nama_logistik }}</td>
+                                                    <td>{{ $log->pivot->jumlah.' '.$log->pivot->satuan }}</td>
+                                                    <td>{{ date("d-m-Y", strtotime($log->pivot->expired)) }}</td>
+                                                    <td>
+                                                        @if ($log->pivot->status == 1)
+                                                            Sukses
+                                                        @else
+                                                            Gagal
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 </table>
                                 <div class="card-body">

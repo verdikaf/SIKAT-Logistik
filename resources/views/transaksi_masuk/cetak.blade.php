@@ -94,24 +94,54 @@
         <br>
         <table width="100%">
             <tr>
-                <td align="left">
-                    <strong>Dibuat oleh:</strong>
+                <td width="50%">
+                    <strong>Dibuat oleh</strong>
+                </td>
+                <td width="50%">
+                    <strong>Diverifikasi oleh</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     @foreach ($transaksiMasuk as $key => $item)
                         @foreach ($item->pegawai as $as)
                             @if ($as->pivot->action == 1)
-                                {{ $as->nama_pegawai }}
+                                <img src="{{ public_path('/storage/qr-profile/'.$as->qr) }}" alt="" width="70"/>
+                            @endif
+                        @endforeach
+                    @endforeach
+                </td>
+                <td>
+                    @foreach ($transaksiMasuk as $key => $item)
+                        @foreach ($item->pegawai as $as)
+                            @if ($as->pivot->action == 2)
+                            <img src="{{ public_path('/storage/qr-profile/'.$as->qr) }}" alt="" width="70"/>
                             @endif
                         @endforeach
                     @endforeach
                 </td>
             </tr>
             <tr>
-                <td align="left">
-                    <strong>Diverifikasi oleh:</strong>
+                <td>
+                    @foreach ($transaksiMasuk as $key => $item)
+                        @foreach ($item->pegawai as $as)
+                            @if ($as->pivot->action == 1)
+                                <u>{{ $as->nama_pegawai }}</u> <br>
+                                @if ($as->asn == 1)
+                                NIP. {{ $as->id }}
+                                @endif
+                            @endif
+                        @endforeach
+                    @endforeach
+                </td>
+                <td>
                     @foreach ($transaksiMasuk as $key => $item)
                         @foreach ($item->pegawai as $as)
                             @if ($as->pivot->action == 2)
-                                {{ $as->nama_pegawai }}
+                                <u>{{ $as->nama_pegawai }}</u> <br>
+                                @if ($as->asn == 1)
+                                NIP. {{ $as->id }}
+                                @endif
                             @endif
                         @endforeach
                     @endforeach

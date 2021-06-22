@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 //auth
 Route::get('/', 'AuthController@index');
 Route::post('/', 'AuthController@login');
+Route::get('/user-validate/{pegawai}', 'PegawaiController@user_validate');
 
 Route::group(['middleware' => 'AuthLogin'], function () {
     Route::get('/dashboard', 'DashboardController@index');

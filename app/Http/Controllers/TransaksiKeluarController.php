@@ -153,10 +153,16 @@ class TransaksiKeluarController extends Controller
 
     public function submit_cart($id)
     {
-        $tgl = date('Y-m-d');
-        TransaksiKeluar::where('id', $id)->update(['status' => 1, 'tanggal' => $tgl]);
+        $cart = DetailTransaksiKeluar::where('transaksi_keluar_id', $id)->first();
 
-        return redirect(url('transaksi/t_keluar'));
+        if (is_null($cart)) {
+            return redirect()->back()->with('error', 'Masukkan data logistik terlebih dahulu.');
+        } else {
+            $tgl = date('Y-m-d');
+            TransaksiKeluar::where('id', $id)->update(['status' => 1, 'tanggal' => $tgl]);
+
+            return redirect(url('transaksi/t_keluar'))->with('success', 'Transaksi Berhasil Ditambahkan.');
+        }
     }
 
     public function verif_cart($transaksi_keluar_id, $logistik_id)
@@ -240,7 +246,7 @@ class TransaksiKeluarController extends Controller
         $pegawai = Pegawai::find($pegawai_id);
         $transaksiKeluar->pegawai()->attach($pegawai, ['action'=>2]);
 
-        return redirect(url('transaksi/t_keluar'));
+        return redirect(url('transaksi/t_keluar'))->with('success', 'Transaksi Berhasil Diverifikasi.');
     }
 
     public function cetak($id)
@@ -252,25 +258,5 @@ class TransaksiKeluarController extends Controller
         $pdf = PDF::loadview('transaksi_keluar.cetak', ['transaksiKeluar' => $transaksiKeluar, 'cart' => $cart, 'pegawai' => $pegawai]);
         $tgl = preg_replace("/[^0-9]/", "", date('d-m-Y H:i:s'));
         return $pdf->download('invoice_transaksi_keluar_'.$tgl.'.pdf');
-    }
-
-    public function show()
-    {
-        //
-    }
-
-    public function edit()
-    {
-        //
-    }
-
-    public function update(Request $request)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

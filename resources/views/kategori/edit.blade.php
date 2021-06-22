@@ -36,14 +36,14 @@
                                 <label>Jenis Logistik</label>
                                 <select class="form-control @error('tipe_logistik') is-invalid @enderror" name="tipe_logistik">
                                     <option value="">-- Pilih --</option>
-                                    <option value="Habis Pakai" @if (old('tipe_logistik', $kategori->tipe_logistik) == 'Habis Pakai') selected="selected" @endif>Habis Pakai</option>
-                                    <option value="Tidak Habis Pakai" @if (old('tipe_logistik', $kategori->tipe_logistik) == 'Tidak Habis Pakai') selected="selected" @endif>Tidak Habis Pakai</option>
+                                    <option value="Habis Pakai" @if (old('tipe_logistik', $kategori->tipe_logistik) == 'Habis pakai') selected="selected" @endif>Habis Pakai</option>
+                                    <option value="Tidak Habis Pakai" @if (old('tipe_logistik', $kategori->tipe_logistik) == 'Tidak habis pakai') selected="selected" @endif>Tidak Habis Pakai</option>
                                 </select>
                                 @error('tipe_logistik')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-warning">Update</button>
+                            <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
                         </form>
                     </div>
                 </div>

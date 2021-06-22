@@ -89,36 +89,6 @@ class TransaksiKembaliController extends Controller
         $pegawai = Pegawai::find($pegawai_id);
         $transaksiKembali->pegawai()->attach($pegawai, ['action'=>3]);
 
-        return redirect(url('transaksi/t_kembali'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        return redirect(url('transaksi/t_kembali'))->with('success', 'Transaksi Berhasil.');
     }
 }

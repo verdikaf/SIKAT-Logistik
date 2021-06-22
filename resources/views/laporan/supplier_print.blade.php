@@ -82,10 +82,27 @@
         <br>
         <table width="100%">
             <tr>
-                <td align="left"><strong>Dicetak pada:</strong> {{ date('d-m-Y') }}</td>
+                <td width="50%"></td>
+                <td align="center"><strong>Dicetak pada:</strong> {{ date('d-m-Y') }}</td>
             </tr>
             <tr>
-                <td align="left"><strong>Dicetak oleh:</strong> {{ $pegawai }}</td>
+                <td width="50%"></td>
+                <td align="center"><strong>Dicetak oleh</strong></td>
+            </tr>
+            <tr>
+                <td width="50%"></td>
+                <td align="center">
+                    <img src="{{ public_path('/storage/qr-profile/'.$pegawai->qr) }}" alt="" width="70"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="50%"></td>
+                <td align="center">
+                    <u>{{ $pegawai->nama_pegawai }}</u> <br>
+                    @if ($pegawai->asn == 1)
+                        NIP. {{ $pegawai->id }}
+                    @endif
+                </td>
             </tr>
         </table>
     </body>
