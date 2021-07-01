@@ -19,6 +19,7 @@ class CreateDetailTransaksiMasukTable extends Migration
             $table->integer('jumlah');
             $table->date('expired')->nullable();
             $table->tinyInteger('status')->comment('0: proses verifikasi, 1: verifikasi berhasil, 2: verifikasi gagal');
+            $table->string('keterangan', 45);
             $table->bigInteger('logistik_id')->unsigned();
             $table->bigInteger('transaksi_masuk_id')->unsigned();
             $table->foreign('logistik_id')->references('id')->on('logistik')->onDelete('cascade');

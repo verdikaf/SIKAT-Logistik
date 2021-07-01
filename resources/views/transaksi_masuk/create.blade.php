@@ -90,14 +90,28 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama Supplier / Donatur</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" autofocus autocomplete="off">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama supplier / donatur" autofocus autocomplete="off">
                             @error('nama')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label>Nomor Telepon</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                </div>
+                                <input type="number" class="form-control phone-number @error('no_telp') is-invalid @enderror" name="no_telp" value="{{ old('no_telp') }}" placeholder="Masukkan nomor telepon" autocomplete="off">
+                                @error('no_telp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Alamat Supplier / Donatur</label>
-                            <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat">{{ old('alamat') }}</textarea>
+                            <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" placeholder="Masukkan alamat supplier / donatur">{{ old('alamat') }}</textarea>
                             @error('alamat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

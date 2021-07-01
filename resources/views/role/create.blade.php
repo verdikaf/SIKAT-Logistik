@@ -26,7 +26,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Nama Jabatan</label>
-                                <input type="text" class="form-control @error('nama_role') is-invalid @enderror" name="nama_role" value="{{ old('nama_role') }}" autofocus autocomplete="off">
+                                <input type="text" class="form-control @error('nama_role') is-invalid @enderror" name="nama_role" value="{{ old('nama_role') }}" placeholder="Masukkan nama jabatan" autofocus autocomplete="off">
                                 @error('nama_role')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

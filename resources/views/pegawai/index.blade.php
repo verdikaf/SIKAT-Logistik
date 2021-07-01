@@ -34,9 +34,9 @@
                         &nbsp;&nbsp;
                         <h4>Data Pegawai</h4>
                         <div class="card-header-form">
-                            <form action="{{ url('data-pegawai/pegawai') }}" method="GET" role="search">
+                            <form action="{{ url('data-pegawai/pegawai') }}" method="GET" role="search" style="width: 300px">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Search" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="search" placeholder="Cari NIP / Nama Pegawai / Jabatan" autocomplete="off" required>
                                     <div class="input-group-btn">
                                     <button class="btn btn-warning"><i class="fas fa-search"></i></button>
                                     </div>

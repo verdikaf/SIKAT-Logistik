@@ -12,9 +12,12 @@ class LogistikController extends Controller
 {
     public function index(Request $request)
     {
+        $search = $request->search;
         if (!empty($request->input('search'))) {
             $logistik = Logistik::orderBy('nama_logistik', 'asc')->with('kategori', 'satuan')
-            ->where('nama_logistik','like',"%".$request->search."%")->paginate(10);
+            ->whereHas('kategori', function($q) use($search){$q->where('nama_kategori', 'like', "%".$search."%");})
+            ->orWhere('nama_logistik','like',"%".$search."%")
+            ->paginate(10);
         } else {
             $logistik = Logistik::orderBy('nama_logistik', 'asc')->with('kategori', 'satuan')
             ->paginate(10);

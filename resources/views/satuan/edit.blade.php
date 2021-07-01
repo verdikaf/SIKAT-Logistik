@@ -27,7 +27,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Nama Satuan</label>
-                                <input type="text" class="form-control @error('nama_satuan') is-invalid @enderror" name="nama_satuan" value="{{ old('nama_satuan', $satuan->nama_satuan) }}" autocomplete="off">
+                                <input type="text" class="form-control @error('nama_satuan') is-invalid @enderror" name="nama_satuan" value="{{ old('nama_satuan', $satuan->nama_satuan) }}" placeholder="Masukkan nama satuan" autocomplete="off">
                                 @error('nama_satuan')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

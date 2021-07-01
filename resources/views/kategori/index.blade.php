@@ -36,7 +36,7 @@
                         <div class="card-header-form">
                             <form action="{{ url('master-data/kategori') }}" method="GET" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Search" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama Kategori" autocomplete="off" required>
                                     <div class="input-group-btn">
                                     <button class="btn btn-warning"><i class="fas fa-search"></i></button>
                                     </div>

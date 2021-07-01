@@ -56,6 +56,8 @@
 
             @yield('modal_logistik')
 
+            @yield('modal_keterangan')
+
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2021 <div class="bullet"></div> Development By Verdika Fajar Saputra

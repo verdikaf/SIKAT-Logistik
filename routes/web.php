@@ -95,7 +95,7 @@ Route::group(['middleware' => 'AuthLogin'], function () {
     Route::get('/transaksi/t_masuk/verifikasiAll/{transaksi_masuk_id}', 'TransaksiMasukController@verif_all');
 
     Route::get('/verifikasiCartMasuk/{transaksi_masuk_id}/{logistik_id}/{expired}', 'TransaksiMasukController@verif_cart');
-    Route::get('/verifikasiCartMasuk/false/{transaksi_masuk_id}/{logistik_id}/{expired}', 'TransaksiMasukController@verif_cart_false');
+    Route::post('/verifikasiCartMasuk/false', 'TransaksiMasukController@verif_cart_false');
     Route::post('/addSupplier', 'TransaksiMasukController@store_supplier');
     Route::post('/addLogistik', 'TransaksiMasukController@store_logistik');
 
@@ -117,7 +117,7 @@ Route::group(['middleware' => 'AuthLogin'], function () {
     Route::get('/transaksi/t_keluar/verifikasiAll/{transaksi_keluar_id}', 'TransaksiKeluarController@verif_all');
 
     Route::get('/verifikasiCartKeluar/{transaksi_keluar_id}/{logistik_id}', 'TransaksiKeluarController@verif_cart');
-    Route::get('/verifikasiCartKeluar/false/{transaksi_keluar_id}/{logistik_id}', 'TransaksiKeluarController@verif_cart_batal');
+    Route::post('/verifikasiCartKeluar/false', 'TransaksiKeluarController@verif_cart_batal');
     // Route::get('/verifikasiCartKeluar/{transaksi_keluar_id}/{logistik_id}', 'TransaksiKeluarController@verif_cart')->name('verifikasiCartKeluar');
     // Route::get('/batalCartKeluar/{transaksi_keluar_id}/{logistik_id}', 'TransaksiKeluarController@verif_cart_batal')->name('batalCartKeluar');
 

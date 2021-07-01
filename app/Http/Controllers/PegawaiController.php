@@ -14,9 +14,13 @@ class PegawaiController extends Controller
 {
     public function index(Request $request)
     {
+        $search = $request->search;
         if (!empty($request->input('search'))) {
-            $pegawai = Pegawai::orderBy('nama_pegawai', 'asc')->with('role')
-            ->where('nama_pegawai','like',"%".$request->search."%")->paginate(5);
+            $pegawai = Pegawai::orderBy('nama_pegawai', 'asc')
+            ->whereHas('role', function($q) use($search){$q->where('nama_role', 'like', "%".$search."%");})
+            ->orWhere('id','like',"%".$search."%")
+            ->orWhere('nama_pegawai','like',"%".$search."%")
+            ->paginate(5);
         } else {
             $pegawai = Pegawai::orderBy('nama_pegawai', 'asc')->with('role')->paginate(5);
         }

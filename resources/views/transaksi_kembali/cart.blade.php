@@ -60,7 +60,7 @@
                         <h4>Daftar Invoice Transaksi Logistik</h4>
                     </div>
                     <div class="card-body">
-                        @if ($transaksiKembali->implode('status') == 0)
+                        {{-- @if ($transaksiKembali->implode('status') == 0)
                         <form action="{{ url('transaksi/t_kembali/cart') }}" method="post">
                             @csrf
                             <div class="row">
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                         </form>
-                        @endif
+                        @endif --}}
                         <div class="row">
                             <div class="table-responsive">
                                 <table class="table table-striped">

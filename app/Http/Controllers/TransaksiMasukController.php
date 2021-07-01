@@ -23,7 +23,7 @@ class TransaksiMasukController extends Controller
                 ->orWhere('id','like',"%".$search."%")
                 ->orWhere('tanggal','like',"%".$search."%")
                 ->orderBy('id', 'desc')
-                ->paginate(5);
+                ->paginate();
             } else {
                 $transaksi = TransaksiMasuk::with('supplier')->orderBy('id', 'desc')->paginate(5);
             }
@@ -178,13 +178,14 @@ class TransaksiMasukController extends Controller
         return redirect()->back();
     }
 
-    public function verif_cart_false($transaksi_masuk_id, $logistik_id, $expired)
+    public function verif_cart_false(Request $request)
     {
+        $keterangan = $request->keterangan;
         DetailTransaksiMasuk::where([
-            ['transaksi_masuk_id', $transaksi_masuk_id],
-            ['logistik_id', $logistik_id],
-            ['expired', $expired]
-        ])->update(['status' => 2]);
+            ['transaksi_masuk_id', $request->transaksi_masuk_id],
+            ['logistik_id', $request->logistik_id],
+            ['expired', $request->expired]
+        ])->update(['status' => 2, 'keterangan' => $keterangan]);
 
         return redirect()->back();
     }
@@ -232,16 +233,20 @@ class TransaksiMasukController extends Controller
     {
         $request->validate([
             'nama' => 'required|min:3',
+            'no_telp' => 'required|numeric',
             'alamat' => 'required|min:5',
         ], [
             'nama.required' => 'Nama supplier harus diisi.',
             'nama.min' => 'Nama harus lebih dari 3 karakter.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.numeric' => 'Nomor telepon berupa angka.',
             'alamat.required' => 'Alamat supplier harus diisi.',
             'alamat.min' => 'Alamat harus lebih dari 5 karakter.',
         ]);
 
         $supplier = new Supplier;
         $supplier->nama_supplier = $request->nama;
+        $supplier->no_telp = $request->no_telp;
         $supplier->alamat = $request->alamat;
         $supplier->save();
 

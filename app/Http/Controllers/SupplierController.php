@@ -7,7 +7,6 @@ use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
-
     public function index(Request $request)
     {
         if (!empty($request->input('search'))) {
@@ -27,16 +26,20 @@ class SupplierController extends Controller
     {
         $request->validate([
             'nama' => 'required|min:3',
+            'no_telp' => 'required|numeric',
             'alamat' => 'required|min:5',
         ], [
             'nama.required' => 'Nama supplier harus diisi.',
             'nama.min' => 'Nama harus lebih dari 3 karakter.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.numeric' => 'Nomor telepon berupa angka.',
             'alamat.required' => 'Alamat supplier harus diisi.',
             'alamat.min' => 'Alamat harus lebih dari 5 karakter.',
         ]);
 
         $supplier = new Supplier;
         $supplier->nama_supplier = $request->nama;
+        $supplier->no_telp = $request->no_telp;
         $supplier->alamat = $request->alamat;
         $supplier->save();
 
@@ -57,15 +60,19 @@ class SupplierController extends Controller
     {
         $request->validate([
             'nama' => 'required|min:3',
+            'no_telp' => 'required|numeric',
             'alamat' => 'required|min:5',
         ], [
             'nama.required' => 'Nama supplier harus diisi.',
             'nama.min' => 'Nama harus lebih dari 3 karakter.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.numeric' => 'Nomor telepon berupa angka.',
             'alamat.required' => 'Alamat supplier harus diisi.',
             'alamat.min' => 'Alamat harus lebih dari 5 karakter.',
         ]);
 
         $supplier->nama_supplier = $request->nama;
+        $supplier->no_telp = $request->no_telp;
         $supplier->alamat = $request->alamat;
         $supplier->save();
 

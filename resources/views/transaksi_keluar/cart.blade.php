@@ -123,10 +123,9 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nama</th>
                                         <th scope="col">jumlah</th>
-                                        @if ($transaksiKeluar->implode('status') == 0)
                                         <th scope="col">Info</th>
-                                        @elseif ($transaksiKeluar->implode('status') == 1 && $pegawai->role_id == 3)
-                                        <th scope="col">Info</th>
+                                        @if ($transaksiKeluar->implode('status') == 2)
+                                        <th scope="col">Keterangan</th>
                                         @endif
                                     </tr>
                                     @foreach ($cart as $key => $item)
@@ -139,7 +138,7 @@
                                                 <a href="{{ url('transaksi/t_keluar/cart/'.$item->transaksi_keluar_id.'/'.$item->logistik_id) }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-trash-alt"></i> Hapus</a>
                                             @elseif ($transaksiKeluar->implode('status') == 1 && $pegawai->role_id == 3 && $item->status == 0)
                                                 <a href="{{ url('verifikasiCartKeluar/'.$item->transaksi_keluar_id.'/'.$item->logistik_id) }}" class="btn btn-icon icon-left btn-success"><i class="far fa-check-circle"></i> Verifikasi</a>
-                                                <a href="{{ url('verifikasiCartKeluar/false/'.$item->transaksi_keluar_id.'/'.$item->logistik_id) }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-times-circle"></i> Barang Tidak Tersedia</a>
+                                                <a data-toggle="modal" href="#keteranganModal" data-transaksi="{{ $item->transaksi_keluar_id }}" data-logistik="{{ $item->logistik_id }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-times-circle"></i> Barang Tidak Sesuai</a>
                                             @elseif ($transaksiKeluar->implode('status') == 1 && $pegawai->role_id == 1)
                                                 <div class="badge badge-warning">Proses Verifikasi</div>
                                             @elseif ($transaksiKeluar->implode('status') != 0 && $item->status == 3)
@@ -153,6 +152,9 @@
                                                 <div class="badge badge-info">Barang Sudah Kembali</div>
                                             @endif
                                         </td>
+                                        @if ($transaksiKeluar->implode('status') == 2)
+                                        <td>{{ $item->keterangan }}</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </table>
@@ -173,6 +175,39 @@
                     <br>
                     @endif
                 </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modal_keterangan')
+    <div class="modal fade" tabindex="-1" role="dialog" id="keteranganModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambahkan Keterangan Gagal Verifikasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url('verifikasiCartKeluar/false') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" id="transaksi" name="transaksi_keluar_id">
+                        <input type="hidden" id="logistik" name="logistik_id">
+                        <input type="hidden" id="expired" name="expired">
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror" cols="30" rows="10" placeholder="Masukkan keterangan" autofocus>{{ old('keterangan') }}</textarea>
+                            @error('keterangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-warning">Tambah</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -203,29 +238,15 @@
                 $('#jumlah').val(0);
             }
         });
-        // $(document).ready(function(){
-        //     $('#verifikasi').on('click', function(e){
-        //         $.ajax({
-        //             url: '/verifikasiCartKeluar/'+$(this).data('transaksi')+'/'+$(this).data('logistik'),
-        //             method: 'GET'
-        //         }).then(function(data){
-        //             console.log(data);
-        //             location.reload();
-        //             return false;
-        //         });
-        //     });
-        // });
-        // $(document).ready(function(){
-        //     $('#nonVerifikasi').on('click', function(e){
-        //         $.ajax({
-        //             url: '/batalCartKeluar/'+$(this).data('transaksi')+'/'+$(this).data('logistik'),
-        //             method: 'GET'
-        //         }).then(function(data){
-        //             console.log(data);
-        //             location.reload();
-        //             return false;
-        //         });
-        //     });
-        // });
+        $('#keteranganModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var transaksi = button.data('transaksi')
+            var logistik = button.data('logistik')
+            var expired = button.data('expired')
+            var modal = $(this)
+            modal.find('#transaksi').val(transaksi)
+            modal.find('#logistik').val(logistik)
+            modal.find('#expired').val(expired)
+        })
     </script>
 @endpush

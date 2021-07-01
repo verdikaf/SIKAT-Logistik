@@ -127,6 +127,9 @@
                                         <th scope="col">jumlah</th>
                                         <th scope="col">Tgl. Kedaluwarsa</th>
                                         <th scope="col">Info</th>
+                                        @if ($transaksiMasuk->implode('status') == 2)
+                                        <th scope="col">Keterangan</th>
+                                        @endif
                                     </tr>
                                     @foreach ($cart as $key => $item)
                                     <tr>
@@ -147,8 +150,11 @@
                                         @elseif ($transaksiMasuk->implode('status') == 1 && $pegawai->role_id == 3 && $item->status == 0)
                                             <td>
                                                 <a href="{{ url('verifikasiCartMasuk/'.$item->transaksi_masuk_id.'/'.$item->logistik_id.'/'.$item->expired) }}" class="btn btn-icon icon-left btn-success"><i class="far fa-check-circle"></i> Verifikasi</a>
-                                                <a href="{{ url('verifikasiCartMasuk/false/'.$item->transaksi_masuk_id.'/'.$item->logistik_id.'/'.$item->expired) }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-times-circle"></i> Barang Tidak Sesuai</a>
+                                                <a data-toggle="modal" href="#keteranganModal" data-transaksi="{{ $item->transaksi_masuk_id }}" data-logistik="{{ $item->logistik_id }}" data-expired="{{ $item->expired }}" class="btn btn-icon icon-left btn-danger"><i class="far fa-times-circle"></i> Barang Tidak Sesuai</a>
                                             </td>
+                                        @endif
+                                        @if ($transaksiMasuk->implode('status') == 2)
+                                        <td>{{ $item->keterangan }}</td>
                                         @endif
                                     </tr>
                                     @endforeach
@@ -185,7 +191,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('addLogistik') }}" method="post">
+                <form action="{{ url('verifikasiCartMasuk/false/'.$item->transaksi_masuk_id.'/'.$item->logistik_id.'/'.$item->expired) }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-row">
@@ -250,6 +256,39 @@
     </div>
 @endsection
 
+@section('modal_keterangan')
+    <div class="modal fade" tabindex="-1" role="dialog" id="keteranganModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambahkan Keterangan Gagal Verifikasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url('verifikasiCartMasuk/false') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" id="transaksi" name="transaksi_masuk_id">
+                        <input type="hidden" id="logistik" name="logistik_id">
+                        <input type="hidden" id="expired" name="expired">
+                        <div class="form-group">
+                            <label>Keterangan</label>
+                            <textarea name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror" cols="30" rows="10" placeholder="Masukkan keterangan" autofocus>{{ old('keterangan') }}</textarea>
+                            @error('keterangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-warning">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @push('scripts')
     <script type="text/javascript">
         function Random() {
@@ -264,5 +303,15 @@
             console.log(ambilSatuan);
             $("#satuan").val(ambilSatuan);
         });
+        $('#keteranganModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var transaksi = button.data('transaksi')
+            var logistik = button.data('logistik')
+            var expired = button.data('expired')
+            var modal = $(this)
+            modal.find('#transaksi').val(transaksi)
+            modal.find('#logistik').val(logistik)
+            modal.find('#expired').val(expired)
+        })
     </script>
 @endpush

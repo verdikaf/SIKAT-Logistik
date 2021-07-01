@@ -29,10 +29,9 @@ class AuthController extends Controller
                 session()->put('berhasil_login', $user_information);
                 return redirect('/dashboard');
             } else {
-                return redirect('/')->with('message', 'Password anda salah.');
+                return redirect('/')->with('message', 'NIP atau Password anda salah.');
             }
         }
-        return redirect('/')->with('message', 'NIP anda salah.');
     }
 
     public function logout(Request $request)

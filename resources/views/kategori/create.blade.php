@@ -26,7 +26,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Nama Kategori</label>
-                                <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ old('nama_kategori') }}" autofocus autocomplete="off">
+                                <input type="text" class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ old('nama_kategori') }}" placeholder="Masukkan nama kategori" autofocus autocomplete="off">
                                 @error('nama_kategori')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label>Jenis Logistik</label>
                                 <select class="form-control @error('tipe_logistik') is-invalid @enderror" name="tipe_logistik">
-                                    <option value="">-- Pilih --</option>
+                                    <option value="">-- Pilih Jenis Logistik --</option>
                                     <option value="Habis Pakai" @if (old('tipe_logistik') == 'Habis Pakai') selected="selected" @endif>Habis Pakai</option>
                                     <option value="Tidak Habis Pakai" @if (old('tipe_logistik') == 'Tidak Habis Pakai') selected="selected" @endif>Tidak Habis Pakai</option>
                                 </select>

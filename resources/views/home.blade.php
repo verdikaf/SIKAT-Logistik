@@ -111,7 +111,7 @@
         <div class="col-lg-8 col-md-12 col-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Grafik Transaksi Logistik</h4>
+                    <h4>Grafik Transaksi Logistik Tahun {{ date('Y') }}</h4>
                 </div>
                 <div class="card-body">
                     <canvas id="myChart" height="182"></canvas>
@@ -139,7 +139,7 @@
             data: {
                 labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 datasets: [{
-                    label: 'Jumlah transaksi masuk tahun 2021',
+                    label: 'Jumlah transaksi masuk',
                     data: {{ json_encode($jumlah_transaksi_masuk) }},
                     borderWidth: 2,
                     backgroundColor: '#F77F00',
@@ -149,7 +149,7 @@
                     pointRadius: 4
                 },
                 {
-                    label: 'Jumlah transaksi keluar tahun 2021',
+                    label: 'Jumlah transaksi keluar',
                     backgroundColor: '#6777ef',
                     borderColor: '#6777ef',
                     data: {{ json_encode($jumlah_transaksi_keluar) }},
@@ -194,7 +194,6 @@
                 datasets: [{
                     label: 'Jumlah pegawai berdasarkan jabatan',
                     backgroundColor: ['#F77F00', '#6777ef', '#fc544b'],
-                    // backgroundColor: ['#F77F00', '#6777ef', '#63ed7a', '#3abaf4', '#fc544b'],
                     data: {{ json_encode($jumlah_pegawai_jabatan) }},
                     hoverOffset: 4
                 }],

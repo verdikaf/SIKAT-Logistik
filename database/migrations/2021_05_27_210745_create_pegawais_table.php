@@ -27,6 +27,7 @@ class CreatePegawaisTable extends Migration
             $table->string('foto', 100)->nullable();
             $table->tinyInteger('status')->comment('0 = tidak aktif, 1 = aktif');
             $table->tinyInteger('asn')->comment('0 = tidak, 1 = iya');
+            $table->string('qr', 45);
             $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
         });

@@ -18,6 +18,7 @@ class CreateDetailTransaksiKeluarTable extends Migration
             $table->string('satuan', 45);
             $table->integer('jumlah');
             $table->tinyInteger('status')->comment('0: pending, 1: proses verifikasi, 2: sukses, dengan catatan, 3: sukses, 4: sukses, barang belum kembali');
+            $table->string('keterangan', 45);
             $table->bigInteger('logistik_id')->unsigned();
             $table->bigInteger('transaksi_keluar_id')->unsigned();
             $table->foreign('logistik_id')->references('id')->on('logistik')->onDelete('cascade');

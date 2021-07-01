@@ -183,14 +183,14 @@ class TransaksiKeluarController extends Controller
         return redirect()->back();
     }
 
-    public function verif_cart_batal($transaksi_keluar_id, $logistik_id)
+    public function verif_cart_batal(Request $request)
     {
         $cart = DetailTransaksiKeluar::where([
-            ['transaksi_keluar_id', $transaksi_keluar_id],
-            ['logistik_id', $logistik_id]
+            ['transaksi_keluar_id', $request->transaksi_keluar_id],
+            ['logistik_id', $request->logistik_id]
         ])->first();
 
-        $logistik = Logistik::where('id', $logistik_id)->first();
+        $logistik = Logistik::where('id', $request->logistik_id)->first();
         $logistik->stok = (int) $logistik->stok + (int) $cart->jumlah;
         if ($logistik->kategori->tipe_logistik == 'Habis pakai') {
             $logistik->stok_opname = (int) $logistik->stok_opname + (int) $cart->jumlah;
@@ -198,12 +198,11 @@ class TransaksiKeluarController extends Controller
         $logistik->save();
 
         DetailTransaksiKeluar::where([
-            ['transaksi_keluar_id', $transaksi_keluar_id],
-            ['logistik_id', $logistik_id]
-        ])->update(['status' => 3]);
+            ['transaksi_keluar_id', $request->transaksi_keluar_id],
+            ['logistik_id', $request->logistik_id]
+        ])->update(['status' => 3, 'keterangan' => $request->keterangan]);
 
         return redirect()->back();
-        // return json_encode('gagal verifikasi');
     }
 
     public function verif_all($transaksi_keluar_id)

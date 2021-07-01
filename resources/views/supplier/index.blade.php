@@ -34,9 +34,9 @@
                         &nbsp;&nbsp;
                         <h4>Data Supplier & Donatur Logistik</h4>
                         <div class="card-header-form">
-                            <form action="{{ url('supplier') }}" method="GET" role="search">
+                            <form action="{{ url('master-data/supplier') }}" method="GET" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Search" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama Supplier" autocomplete="off" required>
                                     <div class="input-group-btn">
                                     <button class="btn btn-warning"><i class="fas fa-search"></i></button>
                                     </div>
@@ -50,6 +50,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Supplier / Donatur</th>
+                                    <th scope="col">No. Telepon</th>
                                     <th scope="col">Alamat</th>
                                     <th scope="col">Info</th>
                                 </tr>
@@ -57,6 +58,7 @@
                                 <tr>
                                     <td>{{ $supplier->firstItem() + $key }}</td>
                                     <td>{{ $item->nama_supplier }}</td>
+                                    <td>{{ $item->no_telp }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>
                                         <a href="{{ url('/master-data/supplier/'.$item->id.'/edit') }}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Edit</a>
