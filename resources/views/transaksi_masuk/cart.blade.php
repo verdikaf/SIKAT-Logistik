@@ -191,7 +191,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ url('verifikasiCartMasuk/false/'.$item->transaksi_masuk_id.'/'.$item->logistik_id.'/'.$item->expired) }}" method="post">
+                <form action="{{ url('/addLogistik') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-row">

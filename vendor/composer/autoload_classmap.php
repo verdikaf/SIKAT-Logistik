@@ -35,6 +35,7 @@ return array(
     'App\\Models\\DetailTransaksiMasuk' => $baseDir . '/app/Models/DetailTransaksiMasuk.php',
     'App\\Models\\Kategori' => $baseDir . '/app/Models/Kategori.php',
     'App\\Models\\Logistik' => $baseDir . '/app/Models/Logistik.php',
+    'App\\Models\\LogistikRusak' => $baseDir . '/app/Models/LogistikRusak.php',
     'App\\Models\\Menu' => $baseDir . '/app/Models/Menu.php',
     'App\\Models\\Pegawai' => $baseDir . '/app/Models/Pegawai.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',

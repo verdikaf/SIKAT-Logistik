@@ -75,12 +75,17 @@
                                             <div class="badge badge-success">Selesai</div>
                                         @elseif ($item->status == 4)
                                             <div class="badge badge-success">Selesai</div>
-                                            <div class="badge badge-info">Belum kembali</div>
+                                            <div class="badge badge-warning">Belum kembali</div>
+                                        @elseif ($item->status == 5)
+                                            <div class="badge badge-success">Sudah Kembali</div>
+                                            <div class="badge badge-danger">Dengan catatan</div>
+                                        @elseif ($item->status == 6)
+                                            <div class="badge badge-success">Sudah Kembali</div>
                                         @endif
                                     </td>
                                     <td>
                                         <a href="{{ url('/transaksi/t_keluar/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4)
+                                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4 || $item->status == 5 || $item->status == 6)
                                             <a href="{{ url('/transaksi/t_keluar/'.$item->id.'/cetak') }}" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i></a>
                                         @endif
                                     </td>

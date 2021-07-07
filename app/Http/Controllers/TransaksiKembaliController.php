@@ -13,15 +13,13 @@ class TransaksiKembaliController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-
         if (!empty($request->input('search'))) {
             $transaksi = TransaksiKeluar::where('id','like',"%".$search."%")
-            ->orWhere('lokasi','like',"%".$search."%")
-            ->where('status', 4)
+            ->whereBetween('status', [4, 6])
             ->orderBy('id', 'desc')
             ->paginate(5);
         } else {
-            $transaksi = TransaksiKeluar::where('status', 4)->orderBy('id', 'desc')->paginate(5);
+            $transaksi = TransaksiKeluar::whereBetween('status', [4, 6])->orderBy('id', 'desc')->paginate(5);
         }
 
         return view('transaksi_kembali.index', compact('transaksi'));
@@ -78,11 +76,11 @@ class TransaksiKembaliController extends Controller
 
         if(in_array(3, $t_status_array)){
             $transaksiKembali = TransaksiKeluar::find($transaksi_keluar_id);
-            $transaksiKembali->status = 2;
+            $transaksiKembali->status = 5;
             $transaksiKembali->save();
         } else {
             $transaksiKembali = TransaksiKeluar::find($transaksi_keluar_id);
-            $transaksiKembali->status = 3;
+            $transaksiKembali->status = 6;
             $transaksiKembali->save();
         }
 

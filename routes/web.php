@@ -58,6 +58,9 @@ Route::group(['middleware' => 'AuthLogin'], function () {
     Route::put('/master-data/logistik/{logistik}', 'LogistikController@update');
     Route::delete('/master-data/logistik/{logistik}', 'LogistikController@destroy');
 
+    Route::get('/master-data/logistik_rusak', 'LogistikController@index_broken');
+    Route::post('/master-data/logistik/rusak', 'LogistikController@log_rusak');
+
     //pegawai
     Route::get('/data-pegawai/pegawai', 'PegawaiController@index');
     Route::get('/data-pegawai/pegawai/create', 'PegawaiController@create');

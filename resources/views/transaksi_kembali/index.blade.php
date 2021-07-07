@@ -34,7 +34,7 @@
                         <div class="card-header-form">
                             <form action="{{ url('transaksi/t_kembali') }}" method="GET" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Search" autocomplete="off" required>
+                                    <input type="text" class="form-control" name="search" placeholder="Cari No. Transaksi" autocomplete="off" required>
                                     <div class="input-group-btn">
                                     <button class="btn btn-warning"><i class="fas fa-search"></i></button>
                                     </div>
@@ -60,13 +60,9 @@
                                         <td>{{ $item->lokasi }}</td>
                                         <td>{{ date("d-m-Y", strtotime($item->tanggal)) }}</td>
                                         <td>
-                                            @if ($item->status == 0)
-                                                <div class="badge badge-warning">Pending</div>
-                                            @elseif ($item->status == 1)
-                                                <div class="badge badge-info">Dalam Proses</div>
-                                            @elseif ($item->status == 2)
+                                            @if ($item->status == 5)
                                                 <div class="badge badge-success">Sudah Kembali</div>
-                                            @elseif ($item->status == 3)
+                                            @elseif ($item->status == 6)
                                                 <div class="badge badge-success">Sudah Kembali</div>
                                             @elseif ($item->status == 4)
                                                 <div class="badge badge-info">Belum Kembali</div>
@@ -74,6 +70,9 @@
                                         </td>
                                         <td>
                                             <a href="{{ url('/transaksi/t_kembali/'.$item->id.'/cart') }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                            @if ($item->status == 5 || $item->status == 6)
+                                                <a href="{{ url('/transaksi/t_keluar/'.$item->id.'/cetak') }}" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

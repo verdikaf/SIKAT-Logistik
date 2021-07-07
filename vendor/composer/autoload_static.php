@@ -545,6 +545,7 @@ class ComposerStaticInit795708590a3fe48350079dbb56a89e5e
         'App\\Models\\DetailTransaksiMasuk' => __DIR__ . '/../..' . '/app/Models/DetailTransaksiMasuk.php',
         'App\\Models\\Kategori' => __DIR__ . '/../..' . '/app/Models/Kategori.php',
         'App\\Models\\Logistik' => __DIR__ . '/../..' . '/app/Models/Logistik.php',
+        'App\\Models\\LogistikRusak' => __DIR__ . '/../..' . '/app/Models/LogistikRusak.php',
         'App\\Models\\Menu' => __DIR__ . '/../..' . '/app/Models/Menu.php',
         'App\\Models\\Pegawai' => __DIR__ . '/../..' . '/app/Models/Pegawai.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',

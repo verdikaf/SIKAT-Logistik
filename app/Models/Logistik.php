@@ -24,4 +24,8 @@ class Logistik extends Model
     public function transaksi(){
         return $this->belongsToMany(Transaksi::class, 'transaction_line');
     }
+
+    public function logistik_rusak(){
+        return $this->hasOne(LogistikRusak::class);
+    }
 }

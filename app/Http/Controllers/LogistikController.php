@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Logistik;
 use App\Models\Kategori;
+use App\Models\LogistikRusak;
 use App\Models\Satuan;
 use App\Models\Supplier;
 
@@ -99,6 +100,33 @@ class LogistikController extends Controller
         $logistik->save();
 
         return redirect('/master-data/logistik')->with('success', 'Data Berhasil Diperbarui.');
+    }
+
+    public function log_rusak(Request $request)
+    {
+        $log_rusak = LogistikRusak::firstOrNew(['logistik_id' => $request->logistik_id]);
+        $log_rusak->jumlah = $log_rusak->jumlah + $request->logistik_rusak;
+        $log_rusak->save();
+
+        $logistik = Logistik::where('id', $request->logistik_id)->first();
+        $logistik->stok = (int) $logistik->stok - (int) $request->logistik_rusak;
+        $logistik->stok_opname = (int) $logistik->stok_opname - (int) $request->logistik_rusak;
+        $logistik->save();
+
+        return redirect('/master-data/logistik')->with('success', 'Data Berhasil Diperbarui.');
+    }
+
+    public function index_broken(Request $request)
+    {
+        $search = $request->search;
+        if (!empty($request->input('search'))) {
+            $logistik = LogistikRusak::with('logistik')
+            ->whereHas('logistik', function($q) use($search){$q->where('nama_logistik', 'like', "%".$search."%");})
+            ->paginate(10);
+        } else {
+            $logistik = LogistikRusak::paginate(10);
+        }
+        return view('logistik.index_broken', compact('logistik'));
     }
 
     public function destroy($id)

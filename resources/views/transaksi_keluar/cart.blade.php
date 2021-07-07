@@ -22,7 +22,7 @@
                     <div class="card-header">
                         <h4>Data Logistik Keluar</h4>
                         <div class="card-header-form">
-                            @if ($transaksiKeluar->implode('status') == 2 || $transaksiKeluar->implode('status') == 3 || $transaksiKeluar->implode('status') == 4)
+                            @if ($transaksiKeluar->implode('status') == 2 || $transaksiKeluar->implode('status') == 3 || $transaksiKeluar->implode('status') == 4 || $transaksiKeluar->implode('status') == 5 || $transaksiKeluar->implode('status') == 6)
                                 <a href="{{ url('/transaksi/t_keluar/'.$transaksiKeluar->implode('id').'/cetak') }}" target="_blank" class="btn btn-primary">Cetak Invoice</a>
                             @endif
                             <a href="{{ url('transaksi/t_keluar') }}" class="btn btn-secondary" type="button">Kembali ke Halaman Utama</a>
@@ -235,7 +235,7 @@
 
             if (num_jumlah > num_stok){
                 alert("Jumlah melebihi stok tersedia");
-                $('#jumlah').val(0);
+                $('#jumlah').val(null);
             }
         });
         $('#keteranganModal').on('show.bs.modal', function (event) {

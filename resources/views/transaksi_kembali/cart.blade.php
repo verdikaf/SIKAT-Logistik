@@ -21,6 +21,9 @@
                     <div class="card-header">
                         <h4>Data Logistik Kembali</h4>
                         <div class="card-header-form">
+                            @if ($transaksiKembali->implode('status') == 5 || $transaksiKembali->implode('status') == 6)
+                                <a href="{{ url('/transaksi/t_keluar/'.$transaksiKembali->implode('id').'/cetak') }}" target="_blank" class="btn btn-primary">Cetak Invoice</a>
+                            @endif
                             <a href="{{ url('transaksi/t_kembali') }}" class="btn btn-secondary" type="button">Kembali ke Halaman Utama</a>
                         </div>
                     </div>
@@ -60,48 +63,6 @@
                         <h4>Daftar Invoice Transaksi Logistik</h4>
                     </div>
                     <div class="card-body">
-                        {{-- @if ($transaksiKembali->implode('status') == 0)
-                        <form action="{{ url('transaksi/t_kembali/cart') }}" method="post">
-                            @csrf
-                            <div class="row">
-                                <input type="hidden" class="form-control" name="id" value="{{ $transaksiKembali->implode('id') }}">
-                                <div class="form-group col-md-4">
-                                    <label>Nama logistik</label>
-                                    <select class="form-control select2 @error('logistik_id') is-invalid @enderror" id="logistik" name="logistik_id">
-                                        <option value="">-- Pilih Nama Logistik --</option>
-                                        @foreach ($logistik as $item)
-                                            <option id="log-{{ $item->id }}" value="{{ $item->id }}"
-                                                data-stok="{{ $item->stok }}"
-                                                data-satuan="{{ $item->satuan->nama_satuan }}">{{ $item->nama_logistik }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('logistik_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label>Jumlah logistik</label>
-                                    <input type="number" onkeyup="test()" data-id="jumlah" class="form-control test @error('jumlah') is-invalid @enderror" name="jumlah" placeholder="Masukkan jumlah berdasarkan satuan" autocomplete="off" id="jumlah">
-                                    @error('jumlah')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Stok logistik</label>
-                                    <input type="text" onkeyup="test()" data-id="stok" class="form-control-plaintext test" name="stok" id="stok" readonly>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label>Satuan logistik</label>
-                                    <input type="text" class="form-control-plaintext" name="satuan" id="satuan" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <button type="submit" class="btn btn-warning">Tambahkan ke invoice</button>
-                                </div>
-                            </div>
-                        </form>
-                        @endif --}}
                         <div class="row">
                             <div class="table-responsive">
                                 <table class="table table-striped">

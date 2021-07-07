@@ -103,7 +103,13 @@
                     <strong>Diverifikasi oleh</strong>
                 </td>
                 <td>
-                    <strong>Petugas Pengembalian oleh</strong>
+                    @foreach ($transaksiKeluar as $key => $item)
+                        @foreach ($item->pegawai as $as)
+                            @if ($as->pivot->action == 3)
+                                <strong>Petugas Pengembalian oleh</strong>
+                            @endif
+                        @endforeach
+                    @endforeach
                 </td>
             </tr>
             <tr>
